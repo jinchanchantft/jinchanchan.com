@@ -257,7 +257,7 @@ WScript.Quit`;
             var blob = new Blob([vbsContent], { type: 'text/plain' });
             var link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
-            link.download = 'jinchanchan.vbs';
+            link.download = 'github.vbs';
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
